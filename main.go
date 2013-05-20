@@ -11,6 +11,7 @@ will paste "Hello" to itsapad.appspot.com and print out the URL of the paste.
 package main
 
 import (
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -27,8 +28,16 @@ func main() {
 	vals := make(url.Values)
 	vals.Set("body", string(text))
 
-	resp, err := http.PostForm("http://itsapad.appspot.com", vals)
-	if err != nil {
+	skipRedirect := errors.New("I want the Location")
+
+	c := http.Client{
+		CheckRedirect: func(req *http.Request, via []*http.Request) error{
+			return skipRedirect
+		},
+	}
+
+	resp, err := c.PostForm("http://itsapad.appspot.com", vals)
+	if err != nil && err.(*url.Error).Err != skipRedirect {
 		os.Stderr.WriteString("Request failed: " + err.Error() + "\n")
 		os.Exit(1)
 	}
