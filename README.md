@@ -1,8 +1,8 @@
-Topad pastes its standard input to itsapad.appspot.com and prints the URL
+Topad pastes its standard input to pad.mccoy.space (see https://github.com/mccoyst/itsapad) and prints the URL
 on standard output.
 
 For example:
 
 	echo Hello | topad
 
-will paste "Hello" to itsapad.appspot.com and print out the URL of the paste.
+will paste "Hello" to pad.mccoy.space and print out the URL of the paste.
