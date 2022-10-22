@@ -1,3 +1,3 @@
-module github.com/mccoyst/topad
+module mccoy.space/g/topad
 
-go 1.17
+go 1.19
